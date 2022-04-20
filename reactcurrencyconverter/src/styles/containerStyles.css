@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    display: grid;
+    max-width: 1000px;
+    margin: 30px auto;
+    overflow: auto;
+    min-height: 300px;
+    border: 1px solid steelblue;
+    padding: 30px;
+    border-radius: 5px;
+}
+
+.createdEntry{
+    border: 1px solid green;
+    padding: 30px;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+.newEntry{
+    border: 1px solid purple;
+    padding: 30px;
+    border-radius: 5px;
+}
