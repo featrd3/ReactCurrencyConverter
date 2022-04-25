@@ -4,8 +4,8 @@ import EntryContainer from './components/EntryContainer';
 
 function App() {
 
-    const [appState, setAppState] = useState([]);
-    const [idRequest, setIDRequest] = useState(0);
+    var [appState, setAppState] = useState([]);
+    var [idRequest, setIDRequest] = useState(0);
 
     return (
     <div className="container">
@@ -14,12 +14,19 @@ function App() {
             <button onClick= {() =>addObject(appState, setAppState, idRequest, setIDRequest)}>add</button>
             <button onClick= {() =>console.log(appState)}>LOG</button>
         </div>
-        {appState.map((requestData) => <EntryContainer key = {requestData.id} text = 'text' objectContent = {requestData.data[0]} keyTemp = {requestData.id} />)}
+        {appState.map((requestData) => <EntryContainer 
+        key = {requestData.id} 
+        text = 'text' 
+        objectContent = {requestData.data[0]} 
+        keyTemp = {requestData.id} 
+        removeEntryFunction = {removeEntry}
+        appState = {appState}
+        setAppState = {setAppState}
+        />)}
 
         <br/>
     </div>
-)
-
+    )
 }
 
 const addObject = (appState, setAppState, idRequest, setIDRequest) => {
@@ -33,8 +40,13 @@ async function sendRequestGold (appState, setAppState, idRequest) {
     const receivedData = fetch('http://api.nbp.pl/api/cenyzlota')
       .then(result => result.json())
       .then(data => setAppState([...appState,{data,id: idRequest}]));    return (receivedData)
-
 }
+
+const removeEntry = (id, app, setApp) => {
+    
+    setApp([...app.filter(obj => {return obj.id !== id})])
+}
+
 
 export default App;
  
