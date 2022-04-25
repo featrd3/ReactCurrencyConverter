@@ -1,18 +1,22 @@
 
 const EntryContainer = ({text, objectContent, keyTemp, removeEntryFunction, appState, setAppState}) => {
-  
-    return (
-      <div  className="createdEntry">
-          Id: {keyTemp}
-          
-          <br/>
-          Cena: {objectContent.cena}
-          <br/>
-          Data: {objectContent.data}
-          <br/>
-          <button onClick = {() => removeEntryFunction(keyTemp, appState, setAppState) }>X</button>
-      </div>
-    )
+
+
+  return (
+    <div  className="createdEntry">
+        Id: {keyTemp}
+
+        {Object.entries(objectContent).map(([key,value])=>{
+          return (<div key={key}>{key} : {value.toString()}</div>)})}
+
+        <button onClick = {() => removeEntryFunction(keyTemp, appState, setAppState) }>X</button>
+    </div>
+  )
 }
+/*
+{objectContent.map((objectToDisplay) => 
+  objectToDisplay.getOwnPropertyNames
+)}
+*/
 
 export default EntryContainer
