@@ -6,17 +6,21 @@ const EntryContainer = ({text, objectContent, keyTemp, removeEntryFunction, appS
     <div  className="createdEntry">
         Id: {keyTemp}
 
-        {Object.entries(objectContent).map(([key,value])=>{
-          return (<div key={key}>{key} : {value.toString()}</div>)})}
+        {handleContentIsObject(objectContent)}
 
         <button onClick = {() => removeEntryFunction(keyTemp, appState, setAppState) }>X</button>
     </div>
   )
 }
-/*
-{objectContent.map((objectToDisplay) => 
-  objectToDisplay.getOwnPropertyNames
-)}
-*/
+
+function handleContentIsObject (valueToMap){
+  return (
+    <div>
+      {Object.entries(valueToMap).map(([key,value])=>{
+                return (<div key={key}>{key} : {Array.isArray(value) ? 
+                  handleContentIsObject(value[0]) : value.toString()}</div>)})}
+    </div>
+    )
+}
 
 export default EntryContainer
