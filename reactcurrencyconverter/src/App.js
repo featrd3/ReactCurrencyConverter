@@ -8,21 +8,26 @@ function App() {
     var [currencyTable, setCurrencyTable] = useState({rates: 
     [{currency: '', code: '', mid: 0}],date: ''});
     useEffect(()=>{getAllCurrencies(currencyTable,setCurrencyTable)}, []);
-/*
-*/
+    //console.log(currencyTable.rates[sel.selectedIndex].mid) 
 
     return (
     <div className="container">
         <div className="newEntry">
             Add new entry
             <br/>
-            <select>
-                {currencyTable.rates.map((selectableOption, index) => 
-                    <option key={selectableOption.code}>
-                        {selectableOption.code}
-                    </option>
-                    )}
-            </select>
+            <div>
+                <select id="selectCurrency">
+                    <option key='test' defaultValue hidden >Select currency</option>
+                    {currencyTable.rates.map((selectableOption) => 
+                        <option key={selectableOption.code}>
+                            {selectableOption.code}
+                        </option>    )}
+
+                </select>
+                <div id="displayedMID">
+                    MID                    {displayMid(currencyTable)}
+                </div>
+            </div>
             <br/>
             <button onClick= {() =>getAllCurrencies(currencyTable,setCurrencyTable)}>Currencies to Log</button>
             <br/>
@@ -63,11 +68,7 @@ async function sendRequest (appState, setAppState, idRequest, requestURL) {
 }
 
 const getAllCurrencies = (currencyTable, setCurrencyTable) => {
-    
-        getAllCurrenciesRequest(setCurrencyTable);
-        console.log(currencyTable)
-
-    
+    getAllCurrenciesRequest(setCurrencyTable);
 }
 
 async function getAllCurrenciesRequest (setCurrencyTable) {
@@ -79,10 +80,19 @@ async function getAllCurrenciesRequest (setCurrencyTable) {
 }
 
 const removeEntry = (id, app, setApp) => {
-    
     setApp([...app.filter(obj => {return obj.id !== id})])
 }
 
+const displayMid = (currencyTable) => {
+    var sel = document.getElementById("selectCurrency");
+    if (sel != null){
+        sel.addEventListener('change', function() {
+            var text= currencyTable.rates[sel.selectedIndex-1].mid;
+            var paragraph = document.getElementById("displayedMID");
+            paragraph.textContent = text;
+        })
+    }
+}
 
 export default App;
  
