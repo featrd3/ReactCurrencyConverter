@@ -17,10 +17,13 @@ function handleContentIsObject (valueToMap){
   return (
     <div>
       {Object.entries(valueToMap).map(([key,value])=>{
-                return (<div key={key}>{key} : {Array.isArray(value) ? 
-                  handleContentIsObject(value[0]) : value.toString()}</div>)})}
+        return (<div key={key}>{key} : 
+          {Array.isArray(value) ? 
+            handleContentIsObject(value[0]) : 
+            value.toString()}</div>)})}
     </div>
     )
 }
 
 export default EntryContainer
+
