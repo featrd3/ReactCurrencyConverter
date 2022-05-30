@@ -67,36 +67,7 @@ const CurrencyContainers = ({currencyTable}) => {
                 paragraph.textContent = textRate;
             }
         }
-        
-        /*
-        if (sel1 != null && sel2 != null){
-
-            sel1.addEventListener('change', function() {
-                if (sel1.selectedIndex === sel2.selectedIndex){
-                    sel2.selectedIndex = state.selector1
-                    state.selector1 = sel1.selectedIndex;
-                }
-                if (sel1.selectedIndex !== 0 && sel2.selectedIndex !== 0){
-                    var text= (currencyTable.rates[sel1.selectedIndex-1].mid/currencyTable.rates[sel2.selectedIndex-1].mid);
-                    var paragraph = document.getElementById(endTextObjectID);
-                    paragraph.textContent = text;
-                    state.selector1 = sel1.selectedIndex;
-                }
-            })
-            sel2.addEventListener('change', function() {
-                if (sel2.selectedIndex === sel1.selectedIndex){
-                    sel1.selectedIndex = state.selector2
-                    state.selector2 = sel2.selectedIndex;
-                }
-                if (sel1.selectedIndex !== 0 && sel2.selectedIndex !== 0){
-                    var text= (currencyTable.rates[sel1.selectedIndex-1].mid/currencyTable.rates[sel2.selectedIndex-1].mid);
-                    var paragraph = document.getElementById(endTextObjectID);
-                    paragraph.textContent = text;
-                    state.selector2 = sel2.selectedIndex;
-                }
-            })    */
-        
-    
+       
         return (
         <div>
             {selectWithOptionsAndMid("selectCurrency1","displayedMID1")}

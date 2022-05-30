@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import EntryContainer from './components/EntryContainer';
 import CurrencyContainers from './components/CurrencyContainers'
+import {sendRequest, getAllCurrenciesRequest} from './components/APIrequests'
 
 function App() {
     
@@ -15,28 +16,21 @@ function App() {
         sendRequest(appState, setAppState, idRequest, requestURL);
     }
 
-    async function sendRequest (appState, setAppState, idRequest, requestURL) {
-        const url = 'http://api.nbp.pl/api/'+ requestURL;
-        const receivedData = fetch(url)
-        .then(result => result.json()).then(data => Array.isArray(data)? data[0]:data)
-        .then(data => setAppState([...appState,{data,id: idRequest}]));    return (receivedData)
-    }
-
     const getAllCurrencies = (currencyTable, setCurrencyTable) => {
         getAllCurrenciesRequest(setCurrencyTable);
-    }
-
-    async function getAllCurrenciesRequest (setCurrencyTable) {
-        const url = 'http://api.nbp.pl/api/exchangerates/tables/a';
-        const receivedData = fetch(url) 
-        .then(result => result.json()).then(data => data[0])
-        .then(data => setCurrencyTable({rates: data.rates,date: data.effectiveDate}));
-        return (receivedData)
     }
 
     const removeEntry = (id, app, setApp) => {
         setApp([...app.filter(obj => {return obj.id !== id})])
     }
+/*
+    const calculateDate = (date,changePeriod) => {
+        separated = date.split('-');
+        toChange = changePeriod.split('-');
+        separated[0] = separated[0] - 
+        return()
+
+    }*/
 
     return (
     <div className="container">
@@ -50,11 +44,17 @@ function App() {
             <br/>
             <button onClick= {() =>addObject(appState, setAppState, idRequest, setIDRequest, 'cenyzlota')}>Gold</button>
             <br/>
-            <button onClick= {() =>console.log(sendRequest(appState, setAppState, idRequest, setIDRequest, 'exchangerates/rates/a/chf/'))}>LOG</button>
+            <button onClick= {() =>console.log(appState)}>LOG</button>
         </div>
         <div>
             {currencyTable.date}
         </div>  
+        <div>
+            <input type = "date" name="from"/>
+            <button onClick= {() =>addObject(appState, setAppState, idRequest, setIDRequest, 'exchangerates/rates/a/chf/2022-05-24/'+currencyTable.date)}>Chf z okresu</button>
+            <br/>
+
+        </div>
         {appState.map((requestData) => <EntryContainer 
         key = {requestData.id} 
         text = 'text' 
