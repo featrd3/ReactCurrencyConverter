@@ -54,7 +54,7 @@ const EntryContainer = ({text, objectContent, keyTemp, removeEntryFunction, appS
       dataValues = [...dataValues,inputArrayData.mid]
     })
     return(<>
-      <button onClick = {() => updatePlotTimeWindow('2022-05-20') }>20.05</button><button>25.05</button>
+      <button onClick = {() => updatePlotTimeWindow('2022-05-20') }>20.05</button><button onClick = {() => updatePlotTimeWindow('2022-05-25') }>25.05</button>
     <TimeframePlot inputLabels={labels} inputData={dataValues}/></>
     )
   }
@@ -62,7 +62,7 @@ const EntryContainer = ({text, objectContent, keyTemp, removeEntryFunction, appS
 
 
   function updatePlotTimeWindow (newDate){
-    sendRequestUpdateAppState(appState, setAppState, keyTemp, 'exchangerates/rates/a/chf/'+newDate+'/'+objectContent.rates[objectContent.rates.length-1].effectiveDate);
+    sendRequestUpdateAppState(appState, setAppState, keyTemp, 'exchangerates/rates/a/'+objectContent.code+'/'+newDate+'/'+objectContent.rates[objectContent.rates.length-1].effectiveDate);
 
   }
 

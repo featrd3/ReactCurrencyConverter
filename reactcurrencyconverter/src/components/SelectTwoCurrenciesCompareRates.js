@@ -1,6 +1,7 @@
 import React from "react"
+import SelectAllAvailableCurrencies from "./SelectAllAvailableCurrencies";
 
-const CurrencyContainers = ({currencyTable}) => {
+const SelectTwoCurrenciesCompareRates = ({currencyTable}) => {
 
     const state={selector1:1,selector2:1};
 
@@ -8,14 +9,7 @@ const CurrencyContainers = ({currencyTable}) => {
         
         return (
             <div>
-                <select id={selectId}>
-                    <option key='test' defaultValue hidden >Select currency</option>
-                    {currencyTable.rates.map((selectableOption) => 
-                        <option key={selectableOption.code}>
-                            {selectableOption.code}
-                        </option>    
-                    )}
-                </select>
+                <SelectAllAvailableCurrencies currencyTable={currencyTable} selectId={selectId}/>
                 <div id={displayMIDId}>
                     MID
                 </div>
@@ -37,7 +31,6 @@ const CurrencyContainers = ({currencyTable}) => {
             })
         }
     }
-    
         function updateOrSwitchDuplicatingSelections (sel1,displayMIDId1,sel2,displayMIDId2,endTextObjectID){
             if (sel1.selectedIndex === sel2.selectedIndex & sel1.selectedIndex !== 0){
                 sel1.selectedIndex = state.selector2
@@ -78,9 +71,5 @@ const CurrencyContainers = ({currencyTable}) => {
         )
         
     }
-        
-
   
-
-  
-  export default CurrencyContainers
+  export default SelectTwoCurrenciesCompareRates

@@ -27,5 +27,9 @@ export async function sendRequestUpdateAppState (appState, setAppState, idReques
         .then(data => setAppState(newAppState));
     return (receivedData)
 }
-  
+
+export const addObject = (appState, setAppState, idRequest, setIDRequest, requestURL) => {
+    setIDRequest(idRequest+1);
+    sendRequest(appState, setAppState, idRequest, requestURL);
+}
 
