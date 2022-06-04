@@ -59,8 +59,6 @@ const EntryContainer = ({text, objectContent, keyTemp, removeEntryFunction, appS
     )
   }
 
-
-
   function updatePlotTimeWindow (newDate){
     sendRequestUpdateAppState(appState, setAppState, keyTemp, 'exchangerates/rates/a/'+objectContent.code+'/'+newDate+'/'+objectContent.rates[objectContent.rates.length-1].effectiveDate);
 
