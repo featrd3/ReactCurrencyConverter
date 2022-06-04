@@ -1,11 +1,11 @@
 import TimeframePlot from "./TimeframePlot"
 import {sendRequestUpdateAppState} from './APIrequests'
+import {calculateNewStartDate} from './dateUsage'
 
 const EntryContainer = ({text, objectContent, keyTemp, removeEntryFunction, appState, setAppState}) => {
-
+  
   return (
     <div  className="createdEntry">
-        Id: {keyTemp}
         <button onClick = {() => removeEntryFunction(keyTemp, appState, setAppState) }>X</button>
         {handleContentIsObject(objectContent)}
     </div>
@@ -14,18 +14,20 @@ const EntryContainer = ({text, objectContent, keyTemp, removeEntryFunction, appS
   function handleContentIsObject (valueToMap){
     return (
       <div>
-        {Object.entries(valueToMap).map(([key,value])=>{
-          return (
-          <div key={key}>
-            {key}:  
-            {Array.isArray(value) ? 
-              handleValueIsArray(value) : 
-              value.toString()}
-          </div>
-          )})}
+        <p>Currency: {' '+valueToMap.currency}</p>
+        {handleValueIsArray(valueToMap.rates)}
       </div>
       ) 
   }
+/*
+  return (
+    <div key={key}>
+      {key}:  
+      {Array.isArray(value) ? 
+         : 
+        value.toString()}
+    </div>
+    )*/
 
   function handleValueIsArray (inputArray){
     const divStyle = { paddingLeft: '10px'}
@@ -54,14 +56,17 @@ const EntryContainer = ({text, objectContent, keyTemp, removeEntryFunction, appS
       dataValues = [...dataValues,inputArrayData.mid]
     })
     return(<>
-      <button onClick = {() => updatePlotTimeWindow('2022-05-20') }>20.05</button><button onClick = {() => updatePlotTimeWindow('2022-05-25') }>25.05</button>
-    <TimeframePlot inputLabels={labels} inputData={dataValues}/></>
+      <button onClick = {() => updatePlotTimeWindow(calculateNewStartDate(0,0,7))}>1w</button>
+      <button onClick = {() => updatePlotTimeWindow(calculateNewStartDate(0,1,0)) }>1m</button>
+      <button onClick = {() => updatePlotTimeWindow(calculateNewStartDate(1,0,0)) }>1y</button>
+      <TimeframePlot inputLabels={labels} inputData={dataValues} labelCode={objectContent.code}/>
+    </>
+  
     )
   }
 
   function updatePlotTimeWindow (newDate){
     sendRequestUpdateAppState(appState, setAppState, keyTemp, 'exchangerates/rates/a/'+objectContent.code+'/'+newDate+'/'+objectContent.rates[objectContent.rates.length-1].effectiveDate);
-
   }
 
 }

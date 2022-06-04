@@ -3,19 +3,19 @@ import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
 
 
-const TimeframePlot = ({inputLabels,inputData}) => { 
+const TimeframePlot = ({inputLabels,inputData,labelCode}) => { 
 
     const labels = inputLabels;
     const data = {
         labels: labels,
         datasets: [{
-        label: 'My First Dataset',
-        data: inputData,
-        fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1
-    }]};
-
+            label: labelCode,
+            data: inputData,
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+        }]
+    };
 
     return (
         <div>
