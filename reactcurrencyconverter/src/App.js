@@ -5,7 +5,8 @@ import SettingsAndAddingNewGraphs from './components/SettingsAndAddingNewGraphs'
 import {addObject, getAllCurrenciesRequest} from './components/APIrequests'
 
 function App() {
-    
+
+    var [stateSelector, setStateSelector] = useState({selector1:0,selector2:0});
     var [appState, setAppState] = useState([]);
     var [idRequest, setIDRequest] = useState(0);
     var [currencyTable, setCurrencyTable] = useState({rates: 
@@ -33,19 +34,14 @@ function App() {
         <div className="newEntry">
             Add new entry
             <br/>
-            <SelectTwoCurrenciesCompareRates currencyTable={currencyTable}/>
-            <button onClick= {() =>getAllCurrencies(currencyTable,setCurrencyTable)}>Currencies to Log</button>
-            <br/>
-            <button onClick= {() =>addObject(appState, setAppState, idRequest, setIDRequest, 'exchangerates/rates/a/chf/')}>Chf</button>
-            <br/>
-            <button onClick= {() =>addObject(appState, setAppState, idRequest, setIDRequest, 'cenyzlota')}>Gold</button>
-            <br/>
-            <button onClick= {() =>console.log(appState)}>LOG</button>
+            <SelectTwoCurrenciesCompareRates currencyTable={currencyTable} stateSelector={stateSelector}/>
+            <SettingsAndAddingNewGraphs 
+            currencyTable={currencyTable} 
+            appState={appState} setAppState={setAppState} 
+            idRequest={idRequest} setIDRequest={setIDRequest} 
+            stateSelector={stateSelector}
+            selectId="selectCurrencyForGraphs"/>
         </div>
-        <div>
-            {currencyTable.date}
-            { <SettingsAndAddingNewGraphs currencyTable={currencyTable} appState={appState}  setAppState={setAppState} idRequest={idRequest} setIDRequest={setIDRequest} selectId="selectCurrencyForGraphs"/> }
-        </div>  
         <div>
             
         </div>

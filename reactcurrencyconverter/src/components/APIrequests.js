@@ -1,9 +1,12 @@
+
 export async function sendRequest (appState, setAppState, idRequest, requestURL) {
     const url = 'http://api.nbp.pl/api/'+ requestURL;
-    const receivedData = fetch(url)
+    var newAppState = [...appState]
+    const receivedData = await fetch(url)
         .then(result => result.json())
         .then(data => Array.isArray(data) ? data[0] : data) //NBP tends to return either array with one object, or one object. This line makes sure that later we always use object.
-        .then(data => setAppState([...appState,{data,id: idRequest}]));   
+        .then(data => newAppState[idRequest] = {data,id: idRequest})
+        .then(_ => setAppState(newAppState ));   
     return (receivedData)
 }
 
@@ -24,12 +27,13 @@ export async function sendRequestUpdateAppState (appState, setAppState, idReques
         .then(result => result.json())
         .then(data => Array.isArray(data)? data[0]:data)
         .then(data => (newAppState[newId] = {data,id: idRequest}))
-        .then(data => setAppState(newAppState));
+        .then( _  => setAppState(newAppState));
     return (receivedData)
 }
 
 export const addObject = (appState, setAppState, idRequest, setIDRequest, requestURL) => {
-    setIDRequest(idRequest+1);
+
     sendRequest(appState, setAppState, idRequest, requestURL);
+    console.log(appState)
 }
 

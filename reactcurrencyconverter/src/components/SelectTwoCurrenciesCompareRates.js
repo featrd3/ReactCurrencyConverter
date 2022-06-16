@@ -1,9 +1,7 @@
 import React from "react"
 import SelectAllAvailableCurrencies from "./SelectAllAvailableCurrencies";
 
-const SelectTwoCurrenciesCompareRates = ({currencyTable}) => {
-
-    const state={selector1:1,selector2:1};
+const SelectTwoCurrenciesCompareRates = ({currencyTable, stateSelector}) => {
 
     function selectWithOptionsAndMid (selectId,displayMIDId){
         
@@ -33,13 +31,13 @@ const SelectTwoCurrenciesCompareRates = ({currencyTable}) => {
     }
         function updateOrSwitchDuplicatingSelections (sel1,displayMIDId1,sel2,displayMIDId2,endTextObjectID){
             if (sel1.selectedIndex === sel2.selectedIndex & sel1.selectedIndex !== 0){
-                sel1.selectedIndex = state.selector2
-                sel2.selectedIndex = state.selector1
-                state.selector1 = sel1.selectedIndex
-                state.selector2 = sel2.selectedIndex
+                sel1.selectedIndex = stateSelector.selector2
+                sel2.selectedIndex = stateSelector.selector1
+                stateSelector.selector1 = sel1.selectedIndex
+                stateSelector.selector2 = sel2.selectedIndex
             }else{
-                state.selector1 = sel1.selectedIndex
-                state.selector2 = sel2.selectedIndex
+                stateSelector.selector1 = sel1.selectedIndex
+                stateSelector.selector2 = sel2.selectedIndex
             }
             updateMID(sel1,displayMIDId1);
             updateMID(sel2,displayMIDId2);
