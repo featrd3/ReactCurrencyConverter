@@ -1,7 +1,7 @@
 import TimeframePlot from "./TimeframePlot"
 import {sendRequestUpdateAppState} from './APIrequests'
 import {calculateNewStartDate} from './dateUsage'
-import { sendRequest } from "./APIrequests"
+import { sendTwoRequests } from "./APIrequests"
 
 const EntryContainer = ({text, objectContent, keyTemp, currencyTable, setFirstCurrency, setSecondCurrency, stateSelector}) => {
   
@@ -49,27 +49,18 @@ const EntryContainer = ({text, objectContent, keyTemp, currencyTable, setFirstCu
       dataValues = [...dataValues,inputArrayData.mid]
     })
     return(<>
-      <button onClick = {() => updatePlotTimeWindow(calculateNewStartDate(0,0,7))}>1w</button>
-      <button onClick = {() => updatePlotTimeWindow(calculateNewStartDate(0,1,0)) }>1m</button>
-      <button onClick = {() => updatePlotTimeWindow(calculateNewStartDate(1,0,0)) }>1y</button>
+      <button onClick = {() => sendTwoRequests(currencyTable,stateSelector,calculateNewStartDate(0,0,7),setFirstCurrency,setSecondCurrency) }>1w</button>
+      <button onClick = {() => sendTwoRequests(currencyTable,stateSelector,calculateNewStartDate(0,1,0),setFirstCurrency,setSecondCurrency) }>1m</button>
+      <button onClick = {() => sendTwoRequests(currencyTable,stateSelector,calculateNewStartDate(1,0,0),setFirstCurrency,setSecondCurrency) }>1y</button>
       <TimeframePlot inputLabels={labels} inputData={dataValues} labelCode={objectContent.code}/>
     </>
   
     )
   }
 
-  function updatePlotTimeWindow (newDate){
+ 
+  
 
-    Promise.all([
-      sendRequest(setFirstCurrency,
-        'exchangerates/rates/a/'+currencyTable.rates[stateSelector.selector1-1].code+'/'
-        +(newDate)+'/'+currencyTable.date),
-        sendRequest(setSecondCurrency,
-          'exchangerates/rates/a/'+currencyTable.rates[stateSelector.selector2-1].code+'/'
-          +(newDate)+'/'+currencyTable.date)
-      ])
-
-  }
 
 }
 export default EntryContainer

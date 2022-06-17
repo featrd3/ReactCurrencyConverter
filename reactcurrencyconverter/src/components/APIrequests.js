@@ -8,6 +8,17 @@ export async function sendRequest (setAppState, requestURL) {
     return (receivedData)
 }
 
+export async function sendTwoRequests (currencyTable,stateSelector,newDate,setFirstCurrency,setSecondCurrency){
+    Promise.all([
+        sendRequest(setFirstCurrency,
+          'exchangerates/rates/a/'+currencyTable.rates[stateSelector.selector1-1].code+'/'
+          +(newDate)+'/'+currencyTable.date),
+          sendRequest(setSecondCurrency,
+            'exchangerates/rates/a/'+currencyTable.rates[stateSelector.selector2-1].code+'/'
+            +(newDate)+'/'+currencyTable.date)
+        ])
+}
+
 export async function getAllCurrenciesRequest (setCurrencyTable) {
     const url = 'http://api.nbp.pl/api/exchangerates/tables/a';
     const receivedData = fetch(url) 
