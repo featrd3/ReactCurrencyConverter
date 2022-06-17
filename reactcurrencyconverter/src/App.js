@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import EntryContainer from './components/EntryContainer';
 import SelectTwoCurrenciesCompareRates from './components/SelectTwoCurrenciesCompareRates'
 import SettingsAndAddingNewGraphs from './components/SettingsAndAddingNewGraphs';
-import {addObject, getAllCurrenciesRequest} from './components/APIrequests'
+import { getAllCurrenciesRequest} from './components/APIrequests'
 
 function App() {
 
@@ -10,7 +10,6 @@ function App() {
     var [firstCurrency, setFirstCurrency] = useState([]);
     var [secondCurrency, setSecondCurrency] = useState([]);
     var [appState, setAppState] = useState([]);
-    //var [idRequest, setIDRequest] = useState(0);
     var [currencyTable, setCurrencyTable] = useState({rates: 
     [{currency: '', code: '', mid: 0}],date: ''});
 
@@ -42,10 +41,6 @@ function App() {
         getAllCurrenciesRequest(setCurrencyTable);
     }
 
-    const removeEntry = (id, app, setApp) => {
-        setApp([...app.filter(obj => {return obj.id !== id})])
-    }
-
     return (
         <div className="container">
             <div className="newEntry">
@@ -55,7 +50,6 @@ function App() {
                 currencyTable={currencyTable} 
                 setFirstCurrency={setFirstCurrency}
                 setSecondCurrency={setSecondCurrency}
-                //idRequest={idRequest} setIDRequest={setIDRequest} 
                 stateSelector={stateSelector}
                 />
                 <br/>
@@ -65,9 +59,7 @@ function App() {
                 {appState.map((requestData)=>
                     <EntryContainer 
                         key = {requestData.data.code} 
-                        text = 'text' 
-                        objectContent = {requestData.data} 
-                        keyTemp = {requestData.data.code}  
+                        objectContent = {requestData.data}
                         currencyTable={currencyTable} 
                         setFirstCurrency={setFirstCurrency}
                         setSecondCurrency={setSecondCurrency}

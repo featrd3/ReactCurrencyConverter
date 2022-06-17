@@ -8,7 +8,6 @@ export function calculateNewStartDate (yearOffset,monthOffset,dayOffset){
     return(newDate)
   }
 
-  
   function checkAndAdd0toOneDigitDate (date){
 
     if ((''+date).length <= 1){

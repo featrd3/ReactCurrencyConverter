@@ -1,9 +1,8 @@
 import TimeframePlot from "./TimeframePlot"
-import {sendRequestUpdateAppState} from './APIrequests'
 import {calculateNewStartDate} from './dateUsage'
 import { sendTwoRequests } from "./APIrequests"
 
-const EntryContainer = ({text, objectContent, keyTemp, currencyTable, setFirstCurrency, setSecondCurrency, stateSelector}) => {
+const EntryContainer = ({objectContent, currencyTable, setFirstCurrency, setSecondCurrency, stateSelector}) => {
   
   return (
     <div  className="createdEntry">
@@ -57,10 +56,5 @@ const EntryContainer = ({text, objectContent, keyTemp, currencyTable, setFirstCu
   
     )
   }
-
- 
-  
-
-
 }
 export default EntryContainer
