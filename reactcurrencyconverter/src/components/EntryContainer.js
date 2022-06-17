@@ -1,13 +1,15 @@
 import TimeframePlot from "./TimeframePlot"
 import {sendRequestUpdateAppState} from './APIrequests'
 import {calculateNewStartDate} from './dateUsage'
+import { sendRequest } from "./APIrequests"
 
-const EntryContainer = ({text, objectContent, keyTemp, removeEntryFunction, appState, setAppState}) => {
+const EntryContainer = ({text, objectContent, keyTemp, currencyTable, setFirstCurrency, setSecondCurrency, stateSelector}) => {
   
   return (
     <div  className="createdEntry">
-        <button onClick = {() => removeEntryFunction(keyTemp, appState, setAppState) }>X</button>
-        {handleContentIsObject(objectContent)}
+
+      {handleContentIsObject(objectContent)}
+
     </div>
   )
 
@@ -19,15 +21,6 @@ const EntryContainer = ({text, objectContent, keyTemp, removeEntryFunction, appS
       </div>
       ) 
   }
-/*
-  return (
-    <div key={key}>
-      {key}:  
-      {Array.isArray(value) ? 
-         : 
-        value.toString()}
-    </div>
-    )*/
 
   function handleValueIsArray (inputArray){
     const divStyle = { paddingLeft: '10px'}
@@ -66,7 +59,16 @@ const EntryContainer = ({text, objectContent, keyTemp, removeEntryFunction, appS
   }
 
   function updatePlotTimeWindow (newDate){
-    sendRequestUpdateAppState(appState, setAppState, keyTemp, 'exchangerates/rates/a/'+objectContent.code+'/'+newDate+'/'+objectContent.rates[objectContent.rates.length-1].effectiveDate);
+
+    Promise.all([
+      sendRequest(setFirstCurrency,
+        'exchangerates/rates/a/'+currencyTable.rates[stateSelector.selector1-1].code+'/'
+        +(newDate)+'/'+currencyTable.date),
+        sendRequest(setSecondCurrency,
+          'exchangerates/rates/a/'+currencyTable.rates[stateSelector.selector2-1].code+'/'
+          +(newDate)+'/'+currencyTable.date)
+      ])
+
   }
 
 }
