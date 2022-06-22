@@ -3,18 +3,6 @@ import SelectAllAvailableCurrencies from "./SelectAllAvailableCurrencies";
 
 const SelectTwoCurrenciesCompareRates = ({currencyTable, stateSelector}) => {
 
-    function selectWithOptionsAndMid (selectId,displayMIDId){
-        
-        return (
-            <div>
-                <SelectAllAvailableCurrencies currencyTable={currencyTable} selectId={selectId}/>
-                <div id={displayMIDId}>
-                    MID
-                </div>
-            </div>
-        )
-    }
-
     function calculateExchangeRatesFromID (currencyTable, selectObjectID1,displayMIDId1, selectObjectID2,displayMIDId2, endTextObjectID){
         var sel1 = document.getElementById(selectObjectID1);
         var sel2 = document.getElementById(selectObjectID2);
@@ -58,6 +46,18 @@ const SelectTwoCurrenciesCompareRates = ({currencyTable, stateSelector}) => {
                 paragraph.textContent = textRate;
             }
         }
+
+    function selectWithOptionsAndMid (selectId,displayMIDId){
+    
+        return (
+            <div className="selectWithOptionsAndMidStyle">
+                <SelectAllAvailableCurrencies currencyTable={currencyTable} selectId={selectId}/>
+                <div id={displayMIDId}>
+                    MID
+                </div>
+            </div>
+        )
+    }
        
         return (
         <div>

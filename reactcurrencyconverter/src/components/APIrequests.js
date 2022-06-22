@@ -9,6 +9,23 @@ export async function sendRequest (setAppState, requestURL) {
 }
 
 export async function sendTwoRequests (currencyTable,stateSelector,newDate,setFirstCurrency,setSecondCurrency){
+    
+    if (stateSelector.selector1 === 1){
+        
+        return (Promise.all([
+            sendRequest(setSecondCurrency,
+              'exchangerates/rates/a/'+currencyTable.rates[stateSelector.selector2-1].code+'/'
+              +(newDate)+'/'+currencyTable.date)
+        ]))
+    } 
+    if (stateSelector.selector2 === 1){
+        return (Promise.all([
+            sendRequest(setFirstCurrency,
+              'exchangerates/rates/a/'+currencyTable.rates[stateSelector.selector1-1].code+'/'
+              +(newDate)+'/'+currencyTable.date)
+        ]))
+    } 
+
     Promise.all([
         sendRequest(setFirstCurrency,
           'exchangerates/rates/a/'+currencyTable.rates[stateSelector.selector1-1].code+'/'
@@ -16,7 +33,7 @@ export async function sendTwoRequests (currencyTable,stateSelector,newDate,setFi
           sendRequest(setSecondCurrency,
             'exchangerates/rates/a/'+currencyTable.rates[stateSelector.selector2-1].code+'/'
             +(newDate)+'/'+currencyTable.date)
-        ])
+    ])
 }
 
 export async function getAllCurrenciesRequest (setCurrencyTable) {
@@ -24,8 +41,17 @@ export async function getAllCurrenciesRequest (setCurrencyTable) {
     const receivedData = fetch(url) 
         .then(result => result.json())
         .then(data => data[0])
-        .then(data => setCurrencyTable({rates: data.rates,date: data.effectiveDate}));
+        .then(data => setCurrencyTable({rates: [addPLNCurrency(),...data.rates],date: data.effectiveDate}));
     return (receivedData)
+}
+
+function addPLNCurrency (){
+    let additionalCurrencyPLN = {
+        code: "PLN",
+        currency: "polski złoty",
+        mid: 1
+    }
+    return(additionalCurrencyPLN)
 }
 
 export async function sendRequestUpdateAppState (appState, setAppState, idRequest, requestURL) {

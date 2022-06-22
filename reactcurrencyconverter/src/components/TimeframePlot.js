@@ -12,7 +12,7 @@ const TimeframePlot = ({inputLabels,inputData,labelCode}) => {
             label: labelCode,
             data: inputData,
             fill: false,
-            borderColor: 'rgb(75, 192, 192)',
+            borderColor: 'rgb(93, 139, 244)',
             tension: 0.1
         }]
     };

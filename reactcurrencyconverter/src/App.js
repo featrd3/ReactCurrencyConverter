@@ -16,18 +16,54 @@ function App() {
     useEffect(()=>{getAllCurrencies(currencyTable,setCurrencyTable)}, []); 
 
     useEffect(()=>{
-        if ((typeof(firstCurrency.data) != "undefined") && (typeof(secondCurrency.data) != "undefined")){
-            if(firstCurrency.data.rates.length === secondCurrency.data.rates.length){
+        if ((typeof(firstCurrency.data) !== "undefined" || stateSelector.selector1 === 1) && (typeof(secondCurrency.data) !== "undefined"|| stateSelector.selector2 === 1)){
+            
+            if (stateSelector.selector1 === 1){
+                const newCalculatedExchangeRates = secondCurrency.data.rates.map((inputRatesData, index)=>{    
+                    return {effectiveDate: inputRatesData.effectiveDate,
+                        mid: 1/inputRatesData.mid,
+                        no: inputRatesData.no}
+                })
+                const newCalculatedExchangeData = {
+                    data: {
+                        code: 'PLN - ' + secondCurrency.data.code,
+                        currency: 'polski złoty - ' + secondCurrency.data.currency,
+                        rates: newCalculatedExchangeRates,
+                        table: 'A'
+                    }
+                }
+                setAppState([newCalculatedExchangeData])
+            }
+
+            if (stateSelector.selector2 === 1){
+                const newCalculatedExchangeRates = firstCurrency.data.rates.map((inputRatesData, index)=>{    
+                    return {effectiveDate: inputRatesData.effectiveDate,
+                        mid: inputRatesData.mid,
+                        no: inputRatesData.no}
+                })
+                const newCalculatedExchangeData = {
+                    data: {
+                        code: firstCurrency.data.code + ' - PLN' ,
+                        currency: firstCurrency.data.currency + ' - polski złoty',
+                        rates: newCalculatedExchangeRates,
+                        table: 'A'
+                    }
+                }
+                setAppState([newCalculatedExchangeData])
+            }
+
+            if((stateSelector.selector1 !== 1 && stateSelector.selector2 !== 1)&& firstCurrency.data.rates.length === secondCurrency.data.rates.length){
                 const newCalculatedExchangeRates = firstCurrency.data.rates.map((inputRatesData, index)=>{    
                     return {effectiveDate: inputRatesData.effectiveDate,
                         mid: inputRatesData.mid / secondCurrency.data.rates[index].mid,
                         no: inputRatesData.no}
                 })
-                
+                console.log(firstCurrency)
+                console.log(secondCurrency)
                 const newCalculatedExchangeData = {
                     data: {
                         code: firstCurrency.data.code + ' - ' + secondCurrency.data.code,
-                        currency: firstCurrency.data.code + ' to ' + secondCurrency.data.code,
+                        currency: firstCurrency.data.currency + ' - ' + secondCurrency.data.currency,
                         rates: newCalculatedExchangeRates,
                         table: 'A'
                     }
@@ -39,23 +75,23 @@ function App() {
 
     const getAllCurrencies = (currencyTable, setCurrencyTable) => {
         getAllCurrenciesRequest(setCurrencyTable);
+        
     }
 
     return (
-        <div className="container">
-            <div className="newEntry">
+        <div className="mainContainer">
+            <div className="insideMainContainer">
                 <br/>
                 <SelectTwoCurrenciesCompareRates currencyTable={currencyTable} stateSelector={stateSelector}/>
                 <SettingsAndAddingNewGraphs 
                 currencyTable={currencyTable} 
+                firstCurrency={firstCurrency}
                 setFirstCurrency={setFirstCurrency}
+                secondCurrency={secondCurrency}
                 setSecondCurrency={setSecondCurrency}
                 stateSelector={stateSelector}
                 />
                 <br/>
-                
-            </div>
-            <div>
                 {appState.map((requestData)=>
                     <EntryContainer 
                         key = {requestData.data.code} 
