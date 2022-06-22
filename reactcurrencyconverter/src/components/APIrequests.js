@@ -1,10 +1,15 @@
 
-export async function sendRequest (setAppState, requestURL) {
+export async function sendRequest (setAppState, requestURL, retries) {
     const url = 'http://api.nbp.pl/api/'+ requestURL;
     const receivedData = await fetch(url)
-        .then(result => result.json())
-        .then(data => Array.isArray(data) ? data[0] : data) //NBP tends to return either array with one object, or one object. This line makes sure that later we always use object.
-        .then(data => setAppState({data}));   
+        .then(result => {
+            if(result.ok){result.json()
+            .then(data => Array.isArray(data) ? data[0] : data) //NBP tends to return either array with one object, or one object. This line makes sure that later we always use object.
+            .then(data => setAppState({data}))}
+            else if (retries>0){
+                sendRequest (setAppState, requestURL, retries-1)
+            }
+        });   
     return (receivedData)
 }
 
@@ -15,24 +20,24 @@ export async function sendTwoRequests (currencyTable,stateSelector,newDate,setFi
         return (Promise.all([
             sendRequest(setSecondCurrency,
               'exchangerates/rates/a/'+currencyTable.rates[stateSelector.selector2-1].code+'/'
-              +(newDate)+'/'+currencyTable.date)
+              +(newDate)+'/'+currencyTable.date,3)
         ]))
     } 
     if (stateSelector.selector2 === 1){
         return (Promise.all([
             sendRequest(setFirstCurrency,
               'exchangerates/rates/a/'+currencyTable.rates[stateSelector.selector1-1].code+'/'
-              +(newDate)+'/'+currencyTable.date)
+              +(newDate)+'/'+currencyTable.date,3)
         ]))
     } 
 
     Promise.all([
         sendRequest(setFirstCurrency,
           'exchangerates/rates/a/'+currencyTable.rates[stateSelector.selector1-1].code+'/'
-          +(newDate)+'/'+currencyTable.date),
+          +(newDate)+'/'+currencyTable.date,3),
           sendRequest(setSecondCurrency,
             'exchangerates/rates/a/'+currencyTable.rates[stateSelector.selector2-1].code+'/'
-            +(newDate)+'/'+currencyTable.date)
+            +(newDate)+'/'+currencyTable.date,3)
     ])
 }
 
