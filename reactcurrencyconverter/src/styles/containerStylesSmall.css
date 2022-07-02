@@ -1,0 +1,64 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgb(5, 19, 103);
+    
+}
+
+.mainContainer{
+    background-color:rgb(93, 139, 244);
+    display: grid;
+    max-width: 1000px;
+    margin: 10px auto;
+    overflow: auto;
+    min-height: 300px;
+    border: 1px solid rgb(5, 19, 103);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+.insideMainContainer{
+    background-color:rgb(223, 246, 255);
+    border: 1px solid rgb(5, 19, 103);
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+.newEntry{
+    border: 1px solid rgb(5, 19, 103);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.lineChart{
+    overflow: auto;
+}
+
+.selectorAllCurrencies{
+    background-color: rgba(160, 229, 234, 0.983);
+    border: 1px solid rgb(5, 19, 103);
+    border-radius: 0.25em;
+}
+
+.createChartButton{
+    background-color: rgba(160, 229, 234, 0.983);
+    border: 1px solid rgb(5, 19, 103);
+    border-radius: 0.25em;
+}
+
+.chartContainer{
+    padding: 5px;
+}
+
+.chartContainer button{
+    margin-right: 5px;
+    padding: 1px;
+    min-width: 25px;
+    background-color: rgba(160, 229, 234, 0.983);
+    border: 1px solid rgb(5, 19, 103);
+    border-radius: 0.25em;
+
+}

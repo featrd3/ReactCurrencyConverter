@@ -5,28 +5,23 @@ import SettingsAndAddingNewGraphs from './components/SettingsAndAddingNewGraphs'
 import { getAllCurrenciesRequest} from './components/APIrequests'
 
 function App() {
-
-    var [stateSelector, setStateSelector] = useState({selector1:0,selector2:0});
+    var [stateSelector, setStateSelector] = useState({selector1:0, selector2:0});
     var [firstCurrency, setFirstCurrency] = useState([]);
     var [secondCurrency, setSecondCurrency] = useState([]);
     var [appState, setAppState] = useState([]);
     var [currencyTable, setCurrencyTable] = useState({rates: 
-    [{currency: '', code: '', mid: 0}],date: ''});
-
-    useEffect(()=>{getAllCurrencies(currencyTable,setCurrencyTable)}, []); 
+    [{currency: '', code: '', mid: 0}], date: ''});
+    useEffect(()=>{getAllCurrencies(currencyTable, setCurrencyTable)}, []);
 
     useEffect(()=>{
         if ((typeof(firstCurrency.data) !== "undefined" || stateSelector.selector1 === 1) 
-        && (typeof(secondCurrency.data) !== "undefined"|| stateSelector.selector2 === 1)){
-            
+        && (typeof(secondCurrency.data) !== "undefined"|| stateSelector.selector2 === 1)){   
             if (stateSelector.selector1 === 1){
                 setAppState([exchangeFromPLN()])
             }
-
             if (stateSelector.selector2 === 1){
                 setAppState([exchangeToPLN()])
             }
-
             if((stateSelector.selector1 !== 1 && stateSelector.selector2 !== 1)
             && firstCurrency.data.rates.length === secondCurrency.data.rates.length){
                 setAppState([exchangeFromTwoDifferentCurrencies()])
@@ -35,8 +30,7 @@ function App() {
     }, [firstCurrency,secondCurrency]);
 
     function exchangeToPLN (){
-
-        const newCalculatedExchangeRates = firstCurrency.data.rates.map((inputRatesData, index)=>{    
+        const newCalculatedExchangeRates = firstCurrency.data.rates.map((inputRatesData)=>{    
             return {effectiveDate: inputRatesData.effectiveDate,
                 mid: inputRatesData.mid,
                 no: inputRatesData.no}
@@ -53,10 +47,9 @@ function App() {
     }
 
     function exchangeFromPLN (){
-
-        const newCalculatedExchangeRates = secondCurrency.data.rates.map((inputRatesData, index)=>{    
+        const newCalculatedExchangeRates = secondCurrency.data.rates.map((inputRatesData)=>{    
             return {effectiveDate: inputRatesData.effectiveDate,
-                mid: 1/inputRatesData.mid,
+                mid: 1 / inputRatesData.mid,
                 no: inputRatesData.no}
         })
         const newCalculatedExchangeData = {
@@ -95,14 +88,14 @@ function App() {
         <div className="mainContainer">
             <div className="insideMainContainer">
                 <br/>
-                <SelectTwoCurrenciesCompareRates currencyTable={currencyTable} stateSelector={stateSelector}/>
+                <SelectTwoCurrenciesCompareRates currencyTable = {currencyTable} stateSelector = {stateSelector}/>
                 <SettingsAndAddingNewGraphs 
-                currencyTable={currencyTable} 
-                firstCurrency={firstCurrency}
-                setFirstCurrency={setFirstCurrency}
-                secondCurrency={secondCurrency}
-                setSecondCurrency={setSecondCurrency}
-                stateSelector={stateSelector}
+                currencyTable = {currencyTable} 
+                firstCurrency = {firstCurrency}
+                setFirstCurrency = {setFirstCurrency}
+                secondCurrency = {secondCurrency}
+                setSecondCurrency = {setSecondCurrency}
+                stateSelector = {stateSelector}
                 />
                 <br/>
                 {appState.map((requestData)=>
@@ -113,13 +106,11 @@ function App() {
                         setFirstCurrency={setFirstCurrency}
                         setSecondCurrency={setSecondCurrency}
                         stateSelector={stateSelector}
-                    />)
-            }
+                    />
+                )}
             </div>
         </div>
     )
 }
 
-
 export default App;
- 

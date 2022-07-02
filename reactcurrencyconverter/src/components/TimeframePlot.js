@@ -3,7 +3,7 @@ import { Chart, registerables } from 'chart.js';
 Chart.register(...registerables);
 
 
-const TimeframePlot = ({inputLabels,inputData,labelCode}) => { 
+const TimeframePlot = ({inputLabels, inputData, labelCode}) => { 
 
     const labels = inputLabels;
     const data = {
@@ -16,15 +16,12 @@ const TimeframePlot = ({inputLabels,inputData,labelCode}) => {
             tension: 0.1
         }]
     };
-
+    
     return (
         <div>
-          <Line labels={labels} data ={data}/>
+          <Line className = "lineChart" labels = {labels} data = {data}/>
       </div>
     );
 };
-
-  
-
 
 export default TimeframePlot;
