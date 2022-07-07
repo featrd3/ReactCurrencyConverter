@@ -5,6 +5,9 @@ import SettingsAndAddingNewGraphs from './components/SettingsAndAddingNewGraphs'
 import { getAllCurrenciesRequest} from './components/APIrequests'
 
 function App() {
+
+    document.title = "Currency converter"
+
     var [stateSelector, setStateSelector] = useState({selector1:0, selector2:0});
     var [firstCurrency, setFirstCurrency] = useState([]);
     var [secondCurrency, setSecondCurrency] = useState([]);

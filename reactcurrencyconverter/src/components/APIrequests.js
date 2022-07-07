@@ -1,6 +1,6 @@
 
 export async function sendRequest (setAppState, requestURL, retries) {
-    const url = 'http://api.nbp.pl/api/' + requestURL;
+    const url = 'https://api.nbp.pl/api/' + requestURL;
     const receivedData = await fetch(url)
         .then(result => {
             if(result.ok){result.json()
@@ -39,7 +39,7 @@ export async function sendTwoRequests (currencyTable, stateSelector, newDate, se
 }
 
 export async function getAllCurrenciesRequest (setCurrencyTable) {
-    const url = 'http://api.nbp.pl/api/exchangerates/tables/a';
+    const url = 'https://api.nbp.pl/api/exchangerates/tables/a';
     const receivedData = fetch(url) 
         .then(result => result.json())
         .then(data => data[0])
@@ -57,7 +57,7 @@ function addPLNCurrency (){
 }
 
 export async function sendRequestUpdateAppState (appState, setAppState, idRequest, requestURL) {
-    const url = 'http://api.nbp.pl/api/' + requestURL;
+    const url = 'https://api.nbp.pl/api/' + requestURL;
     let newAppState = [...appState]
     let newId = newAppState.findIndex(object => {return object.id === idRequest})
     const receivedData = fetch(url)
