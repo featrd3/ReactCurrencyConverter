@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/ReactCurrencyConverter/static/css/main.5173d68e.css",
-    "main.js": "/ReactCurrencyConverter/static/js/main.befba002.js",
+    "main.js": "/ReactCurrencyConverter/static/js/main.76284de1.js",
     "index.html": "/ReactCurrencyConverter/index.html",
     "main.5173d68e.css.map": "/ReactCurrencyConverter/static/css/main.5173d68e.css.map",
-    "main.befba002.js.map": "/ReactCurrencyConverter/static/js/main.befba002.js.map"
+    "main.76284de1.js.map": "/ReactCurrencyConverter/static/js/main.76284de1.js.map"
   },
   "entrypoints": [
     "static/css/main.5173d68e.css",
-    "static/js/main.befba002.js"
+    "static/js/main.76284de1.js"
   ]
 }
