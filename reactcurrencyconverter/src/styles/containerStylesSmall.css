@@ -12,7 +12,6 @@
     max-width: 1000px;
     margin: 10px auto;
     overflow: auto;
-    min-height: 300px;
     border: 1px solid rgb(5, 19, 103);
     padding: 10px;
     border-radius: 5px;
@@ -23,7 +22,7 @@
     background-color:rgb(223, 246, 255);
     border: 1px solid rgb(5, 19, 103);
     padding: 5px;
-    margin-top: 5px;
+    margin: 5px;
     border-radius: 5px;
 }
 
@@ -41,20 +40,37 @@
     background-color: rgba(160, 229, 234, 0.983);
     border: 1px solid rgb(5, 19, 103);
     border-radius: 0.25em;
+    min-height:35px;
+}
+
+.selectWithOptionsAndMidStyle{
+    max-width:50vw;
+    display:grid;
+    align-content: center;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+
+.selectTwoCurrencies{
+    display:grid;
+    align-content: center;
+    justify-content: center;
+}
+
+#calculatedRates{
+    align-content: center;
+    justify-content: center;
 }
 
 .createChartButton{
     background-color: rgba(160, 229, 234, 0.983);
     border: 1px solid rgb(5, 19, 103);
     border-radius: 0.25em;
-}
-
-.chartContainer{
-    padding: 5px;
+    margin-left: 10vw;
 }
 
 .chartContainer button{
-    margin-right: 5px;
+    margin-right: 5px; 
     padding: 1px;
     min-width: 25px;
     background-color: rgba(160, 229, 234, 0.983);

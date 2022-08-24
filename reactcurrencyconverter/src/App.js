@@ -100,6 +100,7 @@ function App() {
                 setSecondCurrency = {setSecondCurrency}
                 stateSelector = {stateSelector}
                 />
+            
                 <br/>
                 {appState.map((requestData)=>
                     <EntryContainer 

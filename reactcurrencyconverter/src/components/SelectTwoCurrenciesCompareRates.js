@@ -24,16 +24,10 @@ const SelectTwoCurrenciesCompareRates = ({currencyTable, stateSelector}) => {
             stateSelector.selector1 = sel1.selectedIndex
             stateSelector.selector2 = sel2.selectedIndex
         }
-        updateMID(sel1, displayMIDId1);
-        updateMID(sel2, displayMIDId2);
+
         updateExchangeRate(sel1, sel2, endTextObjectID);
     }
-    function updateMID (sel, displayMIDId){
-        try{var textMID = currencyTable.rates[sel.selectedIndex-1].mid + ' PLN';}
-        catch{var textMID = 'MID'}
-        var paragraph = document.getElementById(displayMIDId);
-        paragraph.textContent = textMID;
-    }
+
     function updateExchangeRate (sel1, sel2, endTextObjectID){
         if (sel1.selectedIndex !== 0 && sel2.selectedIndex !== 0){
             let textRate = (currencyTable.rates[sel1.selectedIndex-1].mid / currencyTable.rates[sel2.selectedIndex-1].mid);
@@ -45,14 +39,11 @@ const SelectTwoCurrenciesCompareRates = ({currencyTable, stateSelector}) => {
         return (
             <div className="selectWithOptionsAndMidStyle">
                 <SelectAllAvailableCurrencies currencyTable = {currencyTable} selectId = {selectId}/>
-                <div id = {displayMIDId}>
-                    MID
-                </div>
             </div>
         )
     }
     return (
-    <div>
+    <div className = "selectTwoCurrencies">
         {selectWithOptionsAndMid("selectCurrency1", "displayedMID1")}
         {selectWithOptionsAndMid("selectCurrency2", "displayedMID2")}
         <div id = "calculatedRates">N/A{calculateExchangeRatesFromID

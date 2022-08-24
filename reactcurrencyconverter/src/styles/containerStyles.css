@@ -1,14 +1,18 @@
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 625px) {
+
+    .selectTwoCurrencies{
+        display:grid;
+        grid-template-columns:[first] 50% [line2] 50%;
+    }
 
     .mainContainer{
         background-color:rgb(93, 139, 244);
         display: grid;
         max-width: 1000px;
-        margin: 10px auto;
+        margin: 10px ;
         overflow: auto;
-        min-height: 300px;
         border: 1px solid rgb(5, 19, 103);
-        padding: 30px;
+        padding: 10px;
         border-radius: 5px;
     }
     
