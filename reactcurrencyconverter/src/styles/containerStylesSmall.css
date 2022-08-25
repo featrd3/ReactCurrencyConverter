@@ -3,20 +3,28 @@
     margin: 0;
     padding: 0;
     color: rgb(5, 19, 103);
-    
+    font: 14;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#root{
+    display:grid;
+    align-content: center;
+    justify-content: center;
 }
 
 .mainContainer{
+    position: relative;
     background-color:rgb(93, 139, 244);
     display: grid;
-    max-width: 1000px;
+    min-width:110%;
     margin: 10px auto;
     overflow: auto;
     border: 1px solid rgb(5, 19, 103);
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 5px;   
+    
 }
-
 
 .insideMainContainer{
     background-color:rgb(223, 246, 255);
@@ -57,16 +65,24 @@
     justify-content: center;
 }
 
-#calculatedRates{
+.center{
+    display: grid;
     align-content: center;
     justify-content: center;
 }
 
+#calculatedRates{
+    display:flex;
+    align-content: center;
+    justify-content: center;
+    padding-bottom: 5px;
+}
+
 .createChartButton{
+    position: relative;
     background-color: rgba(160, 229, 234, 0.983);
     border: 1px solid rgb(5, 19, 103);
     border-radius: 0.25em;
-    margin-left: 10vw;
 }
 
 .chartContainer button{
@@ -76,5 +92,4 @@
     background-color: rgba(160, 229, 234, 0.983);
     border: 1px solid rgb(5, 19, 103);
     border-radius: 0.25em;
-
 }

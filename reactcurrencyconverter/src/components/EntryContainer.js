@@ -14,7 +14,7 @@ const EntryContainer = ({objectContent, currencyTable, setFirstCurrency, setSeco
   function handleContentIsObject (valueToMap){
     return (
       <div>
-        <p>Exchange of: {' ' + valueToMap.currency}</p>
+        <p>Kurs: {' ' + valueToMap.currency}</p>
         {handleValueIsArray(valueToMap.rates)}
       </div>
       ) 

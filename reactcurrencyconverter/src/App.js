@@ -92,6 +92,7 @@ function App() {
             <div className="insideMainContainer">
                 <br/>
                 <SelectTwoCurrenciesCompareRates currencyTable = {currencyTable} stateSelector = {stateSelector}/>
+                <div className="center">
                 <SettingsAndAddingNewGraphs 
                 currencyTable = {currencyTable} 
                 firstCurrency = {firstCurrency}
@@ -100,7 +101,7 @@ function App() {
                 setSecondCurrency = {setSecondCurrency}
                 stateSelector = {stateSelector}
                 />
-            
+                </div>
                 <br/>
                 {appState.map((requestData)=>
                     <EntryContainer 

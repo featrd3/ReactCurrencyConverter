@@ -32,7 +32,7 @@ const SelectTwoCurrenciesCompareRates = ({currencyTable, stateSelector}) => {
         if (sel1.selectedIndex !== 0 && sel2.selectedIndex !== 0){
             let textRate = (currencyTable.rates[sel1.selectedIndex-1].mid / currencyTable.rates[sel2.selectedIndex-1].mid);
             let paragraph = document.getElementById(endTextObjectID);
-            paragraph.textContent = textRate;
+            paragraph.textContent = parseFloat(textRate).toFixed(3);
         }
     }
     function selectWithOptionsAndMid (selectId,displayMIDId){
@@ -43,10 +43,12 @@ const SelectTwoCurrenciesCompareRates = ({currencyTable, stateSelector}) => {
         )
     }
     return (
+
     <div className = "selectTwoCurrencies">
         {selectWithOptionsAndMid("selectCurrency1", "displayedMID1")}
         {selectWithOptionsAndMid("selectCurrency2", "displayedMID2")}
-        <div id = "calculatedRates">N/A{calculateExchangeRatesFromID
+    
+        <div id = "calculatedRates">{calculateExchangeRatesFromID
             (currencyTable, "selectCurrency1", "displayedMID1", "selectCurrency2", "displayedMID2", "calculatedRates")}</div>
     </div>
     )

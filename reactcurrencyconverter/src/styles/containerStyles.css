@@ -3,8 +3,17 @@
     .selectTwoCurrencies{
         display:grid;
         grid-template-columns:[first] 50% [line2] 50%;
+        align-content: center;
+        justify-content: center;
     }
 
+    #calculatedRates{
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        grid-area: 2/1/2/3
+    }
+    
     .mainContainer{
         background-color:rgb(93, 139, 244);
         display: grid;
@@ -14,11 +23,14 @@
         border: 1px solid rgb(5, 19, 103);
         padding: 10px;
         border-radius: 5px;
+        
     }
     
     .chartContainer{
         width:100%;
     }
+
+    
 
     .lineChart{
         width:100%;
